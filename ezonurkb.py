@@ -28,14 +28,14 @@ commands = {
     'palindrome': lambda: outputGrid(reps, lambda: createPalindrome(primaryChars, secondaryChars, vowelMult, outputStrLen))
 }
 
-parser = argparse.ArgumentParser(description='Find palindromes')
+parser = argparse.ArgumentParser(description='Generate a list of easily typable randomized strings')
 parser.add_argument('-t', '--type', type=str, help='Type of string to generate', default='interleave', choices=commands.keys())
 parser.add_argument('-r', '--repetitions', type=int, default=1, help='Number of repetitions')
 parser.add_argument('-l', '--length', type=int, default=7, help='Length of palindrome')
-parser.add_argument('-p', '--primary', nargs='+', default=[], help='Primary chars')
-parser.add_argument('-P', '--primary-preset', type=str, help='Primary preset', choices=character_groups.keys())
-parser.add_argument('-s', '--secondary', nargs='+', default=[], help='Secondary chars')
-parser.add_argument('-S', '--secondary-preset', type=str, help='Secondary preset', choices=character_groups.keys())
+parser.add_argument('-p', '--primary', nargs='+', default=[], help='Primary chars separated by spaces')
+parser.add_argument('-P', '--primary-preset', type=str, help='Primary preset')
+parser.add_argument('-s', '--secondary', nargs='+', default=[], help='Secondary chars separated by spaces')
+parser.add_argument('-S', '--secondary-preset', type=str, help='Secondary preset')
 parser.add_argument('-v', '--vowelmult', type=float, help='Change likelihood of vowels', default=1.0)
 
 args = parser.parse_args()
@@ -73,8 +73,8 @@ primaryChars = list(primaryChars)
 secondaryChars = list(secondaryChars)
 
 if len(primaryChars) == 0 and len(secondaryChars) == 0:
-    primaryChars = character_groups['leftHand']
-    secondaryChars = character_groups['rightHand']
+    primaryChars = character_groups['qwertyLeft']
+    secondaryChars = character_groups['qwertyRight']
 
 if len(primaryChars) == 0 or len(secondaryChars) == 0:
     print('One character set is empty, using the provided set for all characters')
